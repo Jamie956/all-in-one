@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ProductMapper">
+	<resultMap type="Product" id="productBean">
+		<id column="pid" property="id" />
+		<result column="pname" property="name" />
+		<result column="price" property="price" />
+		<association property="category" javaType="Category">
+			<id column="cid" property="id" />
+			<result column="cname" property="name" />
+		</association>
+	</resultMap>
+
+	<!-- list many to one -->
+	<select id="findJoinProduct" resultMap="productBean">
+		select c.*, p.*,
+			p.id 'pid', p.name 'pname',
+			c.id 'cid', c.name 'cname' 
+		from category_ c
+		left join
+			product_ p on c.id = p.cid
+	</select>
+
+	<!-- get by id -->
+	<select id="findByIdJoinProduct" resultMap="productBean">
+		select c.*, p.*, 
+			c.id 'cid', c.name 'cname',
+			p.id 'pid', p.name 'pname'
+		from category_ c
+		left join
+			product_ p on c.id = p.cid
+		where p.id = #{id}
+	</select>
+
+	<!-- list by if tag -->
+	<select id="findByIf" resultType="Product">
+		select * from product_
+		<if test="name!=null">
+			where name like concat('%',#{name},'%')
+		</if>
+	</select>
+
+	<!-- list by where tag -->
+	<select id="findByWhere" resultType="Product">
+		select * from product_
+		<where>
+			<if test="name!=null">
+				and name like concat('%',#{name},'%')
+			</if>
+			<if test="price!=null and price!=0">
+				and price > #{price}
+			</if>
+		</where>
+	</select>
+
+	<!-- update by tag set -->
+	<update id="updateBySet" parameterType="Product">
+		update product_
+		<set>
+			<if test="name != null">name=#{name},</if>
+			<if test="price != null">price=#{price}</if>
+		</set>
+		where id=#{id}
+	</update>
+
+
+	<!-- list by trim tag using where -->
+	<select id="findByTrimWhere" resultType="Product">
+		select * from product_
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="name!=null">
+				and name like concat('%',#{name},'%')
+			</if>
+			<if test="price!=null and price!=0">
+				and price > #{price}
+			</if>
+		</trim>
+	</select>
+
+	<!-- update by trim tag using set -->
+	<update id="updateByTrimSet" parameterType="Product">
+		update product_
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="name != null">name=#{name},</if>
+			<if test="price != null">price=#{price}</if>
+		</trim>
+		where id=#{id}
+	</update>
+
+	<!-- list by when-otherwise tag -->
+	<select id="findByWhenOtherwise" resultType="Product">
+		SELECT * FROM product_
+		<where>
+			<choose>
+				<when test="name != null">
+					and name like concat('%',#{name},'%')
+				</when>
+				<when test="price !=null and price != 0">
+					and price > #{price}
+				</when>
+				<otherwise>
+					and id >1
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+	<!-- list by foreach -->
+	<select id="findByForeach" resultType="Product">
+		SELECT * FROM product_
+		WHERE ID in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<!-- list by bind -->
+	<select id="findByBind" resultType="Product">
+		<bind name="likename" value="'%' + name + '%'" />
+		select * from product_ where name like #{likename}
+	</select>
+</mapper>

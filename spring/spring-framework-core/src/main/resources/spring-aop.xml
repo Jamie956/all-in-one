@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           ">
+    <!-- 增强 -->
+    <bean id="targetAdvice" class="org.example._6_aop.xml.TargetAdvice"/>
+    <!-- 切点 -->
+    <bean id="targetPointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+        <property name="pattern" value=".*greeting"/>
+    </bean>
+    <!-- 切面 -->
+    <bean id="greetingAspect" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="advice" ref="targetAdvice"/>
+        <property name="pointcut" ref="targetPointcut"/>
+    </bean>
+    <!-- target -->
+    <bean id="myTarget" class="org.example.share.A"/>
+    <!-- 代理工厂 -->
+    <bean id="haloProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="myTarget"/>
+        <property name="interceptorNames" value="greetingAspect"/>
+    </bean>
+</beans>

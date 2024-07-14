@@ -1,0 +1,58 @@
+
+server:
+  port: 9527
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          #是否从注册中心动态创建路由
+          enabled: true
+      routes:
+        #id               服务ID，没有固定规则但要求唯一，一般与服务名一致
+        #uri.lb           是一个动态路由协议，路由跳转地址，使用微服务服务名 spring.application.name 或者使用 uri: http://localhost:8001
+        #predicates.Path  路径匹配才进行路由，匹配 /payment/get/** 和 /payment/discovery/**
+      #==============/gateway/payment/get/** -> /cloud-payment-service/payment/get/**==============
+        - id: cloud-payment-service
+          uri: lb://cloud-payment-service
+          predicates:
+          - Path=/payment/get/**,/payment/discovery/**
+      #==============/gateway/guonei -> /news.baidu.com/guonei==============
+#        - id: baidu_route
+#          uri: http://news.baidu.com/guonei
+#          predicates:
+#          - Path=/guonei
+      #==============/gateway/get/1 -> /cloud-payment-service/payment/get/1==============
+#        - id: prefixpath_route
+#          uri: lb://cloud-payment-service
+#          predicates:
+#          - Path=/get/**
+#          filters:
+#          - PrefixPath=/payment
+        #==============/gateway/prefix/payment/get/1 -> /cloud-payment-service/payment/get/1==============
+#        - id: strip_route
+#          uri: lb://cloud-payment-service
+#          predicates:
+#            - Path=/prefix/payment/get/**
+#          filters:
+#            - StripPrefix= 1
+        #==============仅转发，/gateway/** -> /cloud-payment-service/**==============
+#        - id: cloud-payment-service
+#          uri: lb://cloud-payment-service
+#          predicates:
+#            - Path=/**
+eureka:
+  instance:
+    hostname: cloud-gateway-service
+  client:
+    service-url:
+      register-with-eureka: true
+      fetch-registry: true
+#      host配置: 127.0.0.1     eureka7001.com
+      defaultZone: http://eureka7001.com:7001/eureka
+#      defaultZone: http://localhost:7001/eureka
+
+

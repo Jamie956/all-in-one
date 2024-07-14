@@ -1,0 +1,35 @@
+#jetcache缓存配置
+jetcache:
+  #统计间隔，0表示不统计
+  statIntervalMinutes: 1
+  areaInCacheName: false
+  #@Cached和@CreateCache自动生成name时，hiddenPackages指定的包名前缀被截掉
+  hidePackages: com.jamie
+  local:
+    #默认area
+    default:
+      #本地缓存类型 linkedhashmap、caffeine
+      type: caffeine
+      keyConvertor: fastjson
+  remote:
+    default:
+      #使用lettuce
+      type: redis.lettuce
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        minIdle: 1
+        maxIdle: 50
+        maxTotal: 1000
+        maxWait: 1000
+      #redis://密码@IP:端口/库
+      uri: redis://:@127.0.0.1:6379/1
+
+spring:
+  redis:
+    host: 127.0.0.1
+    password:
+    port: 6379
+    timeout: 50000
+    database: 1

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.CategoryMapper">
+	<sql id="Base_Column_List" >
+		id, name
+	</sql>
+
+	<!-- simple list -->
+	<select id="findAll" resultType="Category">
+		select 
+			<include refid="Base_Column_List" /> 
+		from category_
+	</select>
+
+	<!-- simple find by id -->
+	<select id="findById" parameterType="_int" resultType="Category">
+		select 
+			<include refid="Base_Column_List" />
+		from category_ where id= #{id}
+	</select>
+	
+	<!-- simple insert -->
+	<insert id="create" parameterType="Category" useGeneratedKeys="true" keyProperty="id">
+		<!-- 
+		<selectKey resultType="java.lang.Short" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+    	-->
+		insert into category_ ( name ) values (#{name})
+	</insert>
+
+	<!-- simple delete -->
+	<delete id="remove" parameterType="Category">
+		delete from category_ where id= #{id}
+	</delete>
+
+	<!-- simple update -->
+	<update id="update" parameterType="Category">
+		update category_ set name=#{name} where id=#{id}
+	</update>
+
+	<!-- list by name -->
+	<select id="findByName" parameterType="string" resultType="Category">
+		select id, name from category_ where name like concat('%',#{0},'%')
+	</select>
+
+	<!-- list by id and name -->
+	<select id="findByIdAndName" parameterType="map" resultType="Category">
+		select id, name from category_ where id> #{id} and name like concat('%',#{name},'%')
+	</select>
+
+	<resultMap type="Category" id="categoryBean">
+		<id column="cid" property="id" />
+		<result column="cname" property="name" jdbcType="VARCHAR" />
+		<collection property="products" ofType="Product">
+			<id column="pid" property="id" />
+			<result column="pname" property="name" />
+			<result column="price" property="price" />
+		</collection>
+	</resultMap>
+	
+	<!-- list one to many -->
+	<select id="findJoinProduct" resultMap="categoryBean">
+		select c.*, p.*, 
+			c.id 'cid', c.name 'cname', 
+			p.id 'pid', p.name 'pname'
+		from category_ c 
+		left join
+			product_ p on c.id = p.cid
+	</select>
+	
+	<!-- list by page -->
+	<select id="findByPage" resultType="Category">
+		select id, name from category_
+		<if test="start!=null and count!=null">
+			limit #{start},#{count}
+		</if>
+	</select>
+
+</mapper>
