@@ -10,7 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
 
     /**
-     * AnnotationConfigApplicationContext 创建容器，容器能够扫描注解来创建 Beans
+     * AnnotationConfigApplicationContext: Spring container，loading beans into container via scan annotation within package
      *
      * new AnnotationConfigApplicationContext():
      * 1.父类创建 beanFactory，存放 bean definition
@@ -28,7 +28,7 @@ public class Main {
      * context.refresh(): create beans
      */
     @Test
-    public void refreshBeansByAnnotation() {
+    public void annotationConfigContext() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("org.example._1_ico_container._1_newcontainer");
         context.refresh();
