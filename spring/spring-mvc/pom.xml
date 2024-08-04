@@ -22,6 +22,7 @@
         <module>_0_first-demo</module>
         <module>_1_set-attribute</module>
         <module>_0_jsp</module>
+        <module>_6_data_binding</module>
     </modules>
 
     <properties>

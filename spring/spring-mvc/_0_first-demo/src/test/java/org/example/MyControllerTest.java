@@ -28,7 +28,7 @@ public class MyControllerTest {
     public void filter() throws Exception {
         String responseMessage = "this is response message";
         MockMvc mvc = MockMvcBuilders.webAppContextSetup(context).build();
-        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post("/first")
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post("/b")
                         .content(responseMessage)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

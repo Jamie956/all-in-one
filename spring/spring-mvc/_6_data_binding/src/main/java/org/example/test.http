@@ -1,0 +1,18 @@
+###
+GET http://localhost:8080/a
+
+###
+POST http://localhost:8080/b
+Content-Type: application/json
+
+{
+    "type":"999"
+}
+
+###
+POST http://localhost:8080/c
+Content-Type: application/json
+
+{
+  "name":"123"
+}

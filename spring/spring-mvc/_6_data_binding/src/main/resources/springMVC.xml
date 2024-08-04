@@ -9,4 +9,13 @@
 
     <context:component-scan base-package="org.example"/>
 
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="propertyEditorRegistrars">
+            <list>
+                <ref bean="customPropertyEditorRegistrar"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="customPropertyEditorRegistrar" class="org.example.CustomPropertyEditorRegistrar"/>
 </beans>

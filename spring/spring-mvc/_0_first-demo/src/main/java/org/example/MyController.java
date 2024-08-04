@@ -6,10 +6,15 @@ import org.springframework.web.bind.annotation.*;
 // 过滤器拦截每一个请求
 @Controller
 public class MyController {
-    @PostMapping("/first")
+    @PostMapping("/b")
     @ResponseBody
-    public String first(@RequestBody String body) {
+    public String b(@RequestBody String body) {
         return body;
     }
 
+    @GetMapping("/a")
+    @ResponseBody
+    public String a() {
+        return "ack";
+    }
 }
