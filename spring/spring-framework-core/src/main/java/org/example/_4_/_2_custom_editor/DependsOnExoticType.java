@@ -1,4 +1,4 @@
-package org.example._4_data_binding._2_custom_editor;
+package org.example._4_._2_custom_editor;
 
 public class DependsOnExoticType {
 

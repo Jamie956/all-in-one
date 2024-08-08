@@ -1,4 +1,4 @@
-package org.example._4_data_binding._1_bean_wrapper;
+package org.example._4_._1_bean_wrapper;
 
 public class Employee {
 

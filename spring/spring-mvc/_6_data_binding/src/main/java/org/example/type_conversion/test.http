@@ -1,0 +1,14 @@
+###
+GET http://localhost:8080/df
+
+###
+GET http://localhost:8080/cs
+
+###
+GET http://localhost:8080/string-to-employee?employee=1,2000
+
+###
+GET http://localhost:8080/cf
+
+###
+GET http://localhost:8080/gc

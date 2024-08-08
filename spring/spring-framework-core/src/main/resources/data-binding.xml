@@ -4,14 +4,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-	<bean id="sample" class="org.example._4_data_binding._2_custom_editor.DependsOnExoticType">
+	<bean id="sample" class="org.example._4_._2_custom_editor.DependsOnExoticType">
 		<property name="type" value="aNameForExoticType"/>
 	</bean>
 
 	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
 		<property name="customEditors">
 			<map>
-				<entry key="org.example._4_data_binding._2_custom_editor.ExoticType" value="org.example._4_data_binding._2_custom_editor.ExoticTypeEditor"/>
+				<entry key="org.example._4_._2_custom_editor.ExoticType" value="org.example._4_._2_custom_editor.ExoticTypeEditor"/>
 			</map>
 		</property>
 	</bean>
