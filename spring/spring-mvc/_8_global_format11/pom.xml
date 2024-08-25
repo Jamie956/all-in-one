@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <artifactId>_8_global_format11</artifactId>
     <packaging>war</packaging>
-    <artifactId>_7_field_formatting1</artifactId>
 
     <dependencies>
         <dependency>

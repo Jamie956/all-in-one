@@ -1,0 +1,14 @@
+###
+GET http://localhost:8080/ack
+
+###
+POST http://localhost:8080/testFormat1
+Content-Type: application/x-www-form-urlencoded
+
+date=20170101
+
+###
+POST http://localhost:8080/testFormat1
+Content-Type: application/x-www-form-urlencoded
+
+date=01.01.2023

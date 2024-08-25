@@ -5,4 +5,4 @@ GET http://localhost:8080/ack
 POST http://localhost:8080/testFormat
 Content-Type: application/x-www-form-urlencoded
 
-date=2017-1-1&ind=1,222,333.4
+date=2017-11-11&ind=1,222,333.4

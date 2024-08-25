@@ -24,6 +24,7 @@
         <module>_0_jsp</module>
         <module>_6_data_binding</module>
         <module>_7_field_formatting1</module>
+        <module>_8_global_format11</module>
     </modules>
 
     <properties>
