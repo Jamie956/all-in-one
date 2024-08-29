@@ -23,8 +23,8 @@
         <module>_1_set-attribute</module>
         <module>_0_jsp</module>
         <module>_6_data_binding</module>
-        <module>_7_field_formatting1</module>
-        <module>_8_global_format11</module>
+        <module>_7_field_formatting</module>
+        <module>_8_global_format</module>
     </modules>
 
     <properties>
