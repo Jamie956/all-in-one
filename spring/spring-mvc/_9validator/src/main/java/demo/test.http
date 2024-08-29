@@ -1,0 +1,31 @@
+###
+
+# curl -X POST
+#  http://localhost:8080/api/users
+#  -H 'Content-Type: application/json'
+#  -d '{"name":"","email":""}'
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "",
+  "email": ""
+}
+
+###
+
+
+# curl -X POST
+#  http://localhost:8080/api/users
+#  -H 'Content-Type: application/json'
+#  -d '{"name":"John Doe","email":"johndoe@example.com"}'
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com"
+}
+
+###
+

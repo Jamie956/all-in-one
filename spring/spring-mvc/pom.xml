@@ -25,6 +25,7 @@
         <module>_6_data_binding</module>
         <module>_7_field_formatting</module>
         <module>_8_global_format</module>
+        <module>_9validator</module>
     </modules>
 
     <properties>
